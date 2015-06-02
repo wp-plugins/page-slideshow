@@ -4,7 +4,7 @@ Tags: slideshow,per page,flexslider
 Donate link: http://www.proseed.de
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 0.0.2
+Stable tag: 0.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
