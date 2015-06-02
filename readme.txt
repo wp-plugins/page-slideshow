@@ -21,7 +21,7 @@ Dependencies: jQuery && jQuery.ui (just sortables)
 == Screenshots ==
 1. this shows the main funcionality. add images, apply a text, and sort if you want.
 
-== Upgrade Notice ==
+== Changelog ==
 
 = 0.0.2 =
 
