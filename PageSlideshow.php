@@ -78,6 +78,7 @@ function proseed_slideshow_image_enqueue() {
 
         wp_enqueue_media();
 
+        wp_register_script( 'flexslider', plugins_url( 'js/jquery.flexslider-min.js', __FILE__ ), array( 'jquery' ) );
 
         wp_register_script( 'proseed-meta-image', plugins_url( 'js/meta-image.js', __FILE__ ), array( 'jquery' ) );
 
@@ -245,29 +246,39 @@ function proseed_insert_custom_image_sizes( $sizes ) {
 
 add_filter( 'image_size_names_choose', 'proseed_insert_custom_image_sizes' );
 
-function proseed_slideshow(){
+function proseed_slideshow($content){
+    if(get_post_type()=='page'){
+        global $post;
+        wp_enqueue_media();
+        wp_register_script('flexslider', plugins_url('js/jquery.flexslider-min.js', __FILE__), array('jquery'));
+        wp_enqueue_style('proseed-meta-flexslider', plugins_url('css/flexslider.css', __FILE__));
+        wp_enqueue_script('flexslider');
 
-    global $post;
-    wp_enqueue_media();
-    wp_register_script( 'flexslider', plugins_url( 'js/jquery.flexslider.js', __FILE__ ), array( 'jquery' ) );
-    wp_enqueue_script( 'flexslider' );
+        $images = get_post_meta($post->ID, "image_data", true);
+        if ($images) {
+            $slideshow= '';
+            if (count($images) > 1) {
+                $slideshow .= '<div class="flexslider">';
+                $slideshow .= '<ul class="slides">';
+                foreach ($images as $image) {
+                    $slideshow .= '<li>';
+                    $slideshow .= wp_get_attachment_image($image[id], 'proseed_slideThumb');
+                    $slideshow .= '<p class="flex-caption">' . $image[headline] . '</p>';
+                    $slideshow .= '</li>';
+                }
 
-    $images = get_post_meta($post->ID,"image_data",true);
-    if ($images) {
-        if (count($images)>1){
-            echo '<div class="flexslider">';
-            echo '<ul class="slides">';
-            foreach ( $images as $image ){
-                echo '<li>';
-                echo wp_get_attachment_image( $image[id] , 'proseed_slideThumb' );
-                echo '<p class="flex-caption">'.$image[headline].'</p>';
-                echo '</li>';
+                $slideshow .= '</ul>';
+                $slideshow .= '</div>';
+            } else {
+                $slideshow = wp_get_attachment_image($images[1][id], 'proseed_slideThumb');
             }
-            echo '</ul>';
-            echo '</div>';
-        } else {
-            echo wp_get_attachment_image( $images[1][id] , 'proseed_slideThumb' );
+            /** @todo: let users decide in options page whether above or below 'the_content' */
+            $slideshow .= $content;
+            return $slideshow;
         }
+    }else{
+        return $content;
     }
 
 }
+add_filter('the_content','proseed_slideshow');
