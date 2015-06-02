@@ -261,7 +261,7 @@ function proseed_slideshow($content){
         if ($images) {
             $slideshow= '';
             if (count($images) > 1) {
-                $slideshow .= '<div class="proseed-flexslider">';
+                $slideshow .= '<div class="flexslider">';
                 $slideshow .= '<ul class="slides">';
                 foreach ($images as $image) {
                     $slideshow .= '<li>';

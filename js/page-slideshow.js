@@ -1,5 +1,5 @@
 (function($){
     $(function(){
-       $('.proseed-flexslider').flexslider();
+       $('.flexslider').flexslider();
     });
 })(jQuery);
