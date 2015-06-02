@@ -2,8 +2,11 @@
 /*
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
-Version: 0.3
 Description: Page based slideshow
+Version: 0.3
+Author URI: http://www.proseed.de/
+License: GPL2+
+Text Domain: page-slideshow
 */
 
 
