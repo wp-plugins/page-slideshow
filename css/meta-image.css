@@ -1,0 +1,28 @@
+#proseed-image-items li{
+	display:inline-block;
+	width:290px;
+	margin-right: 10px;
+	position: relative;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+	background:#fff;
+}
+#proseed-image-items li fieldset{
+	margin: 10px;
+}
+#proseed-image-items li fieldset legend{
+	font-weight: bold;
+}
+#proseed-image-items li fieldset label{
+	width: 30px;
+	display: inline-block;
+	text-transform: uppercase;
+}
+#proseed-image-items li fieldset input{
+	width: 88%;
+}
+#proseed-image-items li .remove {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
