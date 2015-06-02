@@ -4,7 +4,7 @@ Tags: slideshow,per page,flexslider
 Donate link: http://www.proseed.de
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 0.0.2
+Stable tag: 0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
@@ -23,7 +23,12 @@ Dependencies: jQuery && jQuery.ui (just sortables)
 
 == Changelog ==
 
-= 0.0.2 =
+= 0.3 =
+
+- added flexslider fonts
+- preexisting images are now updated by saving
+
+= 0.2 =
 
 - slideshows now appear without calling a function in templates
 - Added flexslider.css

@@ -12,7 +12,7 @@ add_image_size( 'proseed_teaserThumb', 290, 150,true);
 
 // Output Image size @todo: create a options page to change output image size
 
-add_image_size( 'proseed_slideThumb', 1680, 600,true);
+add_image_size( 'proseed_slideThumb', 1024, 768,true);
 
 
 
@@ -31,7 +31,8 @@ function proseed_meta_image_fields($cnt, $p = null) {
     }
 
     $image_src = wp_get_attachment_image_src( $a, "proseed_teaserThumb");
-
+    $attach_data = wp_generate_attachment_metadata( $a, get_attached_file($a) );
+    wp_update_attachment_metadata( $a,  $attach_data );
     echo '<li>';
 
     echo '<img src="'.$image_src[0].'" width="'.$image_src[1].'" height="'.$image_src[2].'" />';
@@ -64,8 +65,6 @@ function proseed_object_init(){
 
     add_meta_box("proseed_meta_image_id", "Slideshow","proseed_meta_image", "page", "normal", "low");
 
-
-
 }
 
 
@@ -77,8 +76,6 @@ function proseed_slideshow_image_enqueue() {
     if( $typenow == 'page' ) {
 
         wp_enqueue_media();
-
-        wp_register_script( 'flexslider', plugins_url( 'js/jquery.flexslider-min.js', __FILE__ ), array( 'jquery' ) );
 
         wp_register_script( 'proseed-meta-image', plugins_url( 'js/meta-image.js', __FILE__ ), array( 'jquery' ) );
 
@@ -238,8 +235,6 @@ function proseed_insert_custom_image_sizes( $sizes ) {
 
     }
 
-
-
     return $sizes;
 
 }
@@ -249,10 +244,14 @@ add_filter( 'image_size_names_choose', 'proseed_insert_custom_image_sizes' );
 function proseed_slideshow($content){
     if(get_post_type()=='page'){
         global $post;
+        wp_enqueue_style('proseed-meta-flexslider', plugins_url('css/flexslider.css', __FILE__));
+
+
         wp_enqueue_media();
         wp_register_script('flexslider', plugins_url('js/jquery.flexslider-min.js', __FILE__), array('jquery'));
-        wp_enqueue_style('proseed-meta-flexslider', plugins_url('css/flexslider.css', __FILE__));
+        wp_register_script('page-slideshow-js', plugins_url('js/page-slideshow.js', __FILE__), array('flexslider'));
         wp_enqueue_script('flexslider');
+        wp_enqueue_script('page-slideshow-js');
 
         $images = get_post_meta($post->ID, "image_data", true);
         if ($images) {
