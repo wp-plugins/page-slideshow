@@ -21,12 +21,17 @@ Dependencies: jQuery && jQuery.ui (just sortables)
 == Screenshots ==
 1. this shows the main funcionality. add images, apply a text, and sort if you want.
 
+== Upgrade Notice ==
+
+= 0.3 =
+updates imagesizes by saving (for pre-existing images).
+
 == Changelog ==
 
 = 0.3 =
 
 - added flexslider fonts
-- preexisting images are now updated by saving
+- pre-existing images are now updated by saving
 
 = 0.2 =
 
