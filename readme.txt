@@ -17,13 +17,20 @@ Page Slideshow is a clean plugin with which you can create a slideshow for every
 **Features**
 
 After having successfully installed Page Slideshow, the plugin offers different options to create and edit your slideshow. Within the settings, you will find the following options:
+
 * Position: Determines when the slideshow will be created. It can either be placed before the actual content or after it
+
 * Animation: The slideshow’s animation option regulates in which style the slideshow switches from one slide to the other. You can choose between a ‘Fade’ mode, which generates an alpha effect and a ‘Slide’ mode that creates a flowing transition
+
 * Navigation: You can choose between two different methods with which to navigate your slideshow:
+
     1. With the help of navigation points, which are visibly displayed as dots that on the bottom of the slides and can be used to navigate between slides
-    2. By using the navigation arrows that appear on each side of the slideshow during a mouseover
+    2. By using the navigation arrows that appear on each side of the slideshow during a mouseover.
+
     Both of these methods can be displayed simultaneously
+
 * Image size: The chosen image size affects the maximum solution of the slideshow images
+
 
 **Creation**
 
