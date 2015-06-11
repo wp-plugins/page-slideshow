@@ -3,7 +3,7 @@
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
 Description: Page based slideshow
-Version: 0.3
+Version: 0.4.1
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
@@ -14,9 +14,7 @@ Text Domain: page-slideshow
 
 add_image_size( 'proseed_teaserThumb', 290, 150,true);
 
-// Output Image size @todo: create a options page to change output image size
-
-add_image_size( 'proseed_slideThumb', 1024, 768,true);
+add_image_size( 'proseed_slideThumb', get_option('proseed-slideshow-imagesize-width'), get_option('proseed-slideshow-imagesize-height'),true);
 
 
 
@@ -254,12 +252,21 @@ function proseed_slideshow($content){
         wp_enqueue_media();
         wp_register_script('flexslider', plugins_url('js/jquery.flexslider-min.js', __FILE__), array('jquery'));
         wp_register_script('page-slideshow-js', plugins_url('js/page-slideshow.js', __FILE__), array('flexslider'));
+
+        $script_params = array(
+            'animation' => get_option('proseed-slideshow-animation'),
+            'direction' => get_option('proseed-slideshow-direction'),
+            'control' => get_option('proseed-slideshow-control')
+        );
+
+        wp_localize_script( 'page-slideshow-js', 'pageSlideshow', $script_params );
         wp_enqueue_script('flexslider');
         wp_enqueue_script('page-slideshow-js');
 
         $images = get_post_meta($post->ID, "image_data", true);
         if ($images) {
-            $slideshow= '';
+            $slideshow = '';
+            if( get_option('proseed-slideshow-position')==1) $slideshow .= $content;
             if (count($images) > 1) {
                 $slideshow .= '<div class="flexslider">';
                 $slideshow .= '<ul class="slides">';
@@ -275,9 +282,10 @@ function proseed_slideshow($content){
             } else {
                 $slideshow = wp_get_attachment_image($images[1][id], 'proseed_slideThumb');
             }
-            /** @todo: let users decide in options page whether above or below 'the_content' */
-            $slideshow .= $content;
+            if( get_option('proseed-slideshow-position')==0) $slideshow .= $content;
             return $slideshow;
+        }else{
+            return $content;
         }
     }else{
         return $content;
@@ -285,3 +293,128 @@ function proseed_slideshow($content){
 
 }
 add_filter('the_content','proseed_slideshow');
+
+/* Options page */
+
+if ( is_admin() ){ // admin actions
+
+add_action( 'admin_menu', 'proseed_plugin_menu' );
+  add_action( 'admin_init', 'proseed_register_settings' );
+} else {
+  // non-admin enqueues, actions, and filters
+}
+
+function proseed_register_settings() {
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-position' );
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-animation' );
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-control' );
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-direction' );
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-imagesize-width' );
+    register_setting( 'page-slideshow-options', 'proseed-slideshow-imagesize-height' );
+}
+
+function proseed_plugin_menu() {
+	add_options_page( 'Slideshow options', 'Page slideshow', 'manage_options', 'proseed-identifier', 'proseed_plugin_options' );
+}
+
+
+function proseed_plugin_options() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+    $position = array(
+        array(
+            'name' => __('above','page-slideshow'),
+            'id' => 0
+        ),
+        array(
+            'name' => __('below','page-slideshow'),
+            'id' => 1
+        ),
+    );
+    $animation = array(
+        array(
+            'name' => __('fade','page-slideshow'),
+            'id' => 'fade'
+        ),
+        array(
+            'name' => __('slide','page-slideshow'),
+            'id' => 'slide'
+        ),
+    );
+?>
+    <div class="wrap">
+        <h2><?php _e('Settings') ?> › <?php _e('Page slideshow options') ?></h2>
+        <form method="post" action="options.php">
+            <?php settings_fields( 'page-slideshow-options' ); ?>
+            <?php do_settings_sections( 'page-slideshow-options' ); ?>
+            <table class="form-table">
+                <tr>
+                    <th scope="row">
+                        <label for="proseed-slideshow-position"><?php _e('Position','page-slideshow') ?></label>
+                    </th>
+                    <td>
+                        <select name="proseed-slideshow-position" id="proseed-slideshow-position">
+                            <?php foreach($position as $option): ?>
+                                <option value="<?php echo $option['id'] ?>"<?php if(get_option('proseed-slideshow-position')==$option['id']) echo ' selected="selected"'; ?>><?php echo $option['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <p class="description" id="position-description">
+                            <?php _e('choose the position of your slideshow whether to be "above" or "below".','page-slideshow'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="proseed-slideshow-position"><?php _e('Animation','page-slideshow') ?></label>
+                    </th>
+                    <td>
+                        <select name="proseed-slideshow-animation" id="proseed-slideshow-animation">
+                            <?php foreach($animation as $option): ?>
+                                <option value="<?php echo $option['id'] ?>"<?php if(get_option('proseed-slideshow-animation')==$option['id']) echo ' selected="selected"'; ?>><?php echo $option['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <p class="description" id="position-description">
+                            <?php _e('Select your animation type, "fade" or "slide"','page-slideshow'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="proseed-slideshow-control"><?php _e('Navigation dots','page-slideshow') ?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox"<?php if(get_option('proseed-slideshow-control')=='on') echo 'checked="checked"'; ?> name="proseed-slideshow-control" id="proseed-slideshow-control" />
+                        <p class="description" id="position-description">
+                            <?php _e('Create navigation for paging control of each slide?','page-slideshow'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="proseed-slideshow-control"><?php _e('Navigation arrows','page-slideshow') ?></label>
+                    </th>
+                    <td>
+                        <input type="checkbox"<?php if(get_option('proseed-slideshow-direction')=='on') echo 'checked="checked"'; ?> name="proseed-slideshow-direction" id="proseed-slideshow-direction" />
+                        <p class="description" id="position-description">
+                            <?php _e('Create navigation for previous/next navigation?','page-slideshow'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="proseed-slideshow-imagesize-width"><?php _e('Image size','page-slideshow') ?></label>
+                    </th>
+                    <td>
+                        <input name="proseed-slideshow-imagesize-width" type="text" id="proseed-slideshow-imagesize-width" value="<?php echo esc_attr( get_option('proseed-slideshow-imagesize-width') ); ?>" /> x
+                        <input name="proseed-slideshow-imagesize-height" type="text" id="proseed-slideshow-imagesize-height" value="<?php echo esc_attr( get_option('proseed-slideshow-imagesize-height') ); ?>" />
+                        <p class="description" id="position-description">
+                            <?php _e('set width and height for your slideshow images.','page-slideshow'); ?>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+<?php }
