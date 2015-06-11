@@ -17,22 +17,27 @@ Page Slideshow is a clean plugin with which you can create a slideshow for every
 **Features**
 
 After having successfully installed Page Slideshow, the plugin offers different options to create and edit your slideshow. Within the settings, you will find the following options:
+
 * Position: Determines when the slideshow will be created. It can either be placed before the actual content or after it
-* Animation: The slideshow’s animation option regulates in which style the slideshow switches from one slide to the other. You can choose between a ‘Fade’ mode, which generates an alpha effect and a ‘Slide’ mode that creates a flowing transition
+
+* Animation: The slideshow's animation option regulates in which style the slideshow switches from one slide to the other. You can choose between a 'Fade' mode, which generates an alpha effect and a 'Slide' mode that creates a flowing transition
+
 * Navigation: You can choose between two different methods with which to navigate your slideshow:
+
     1. With the help of navigation points, which are visibly displayed as dots that on the bottom of the slides and can be used to navigate between slides
     2. By using the navigation arrows that appear on each side of the slideshow during a mouseover
+
     Both of these methods can be displayed simultaneously
+
 * Image size: The chosen image size affects the maximum solution of the slideshow images
 
 **Creation**
 
-Once you have installed and activated the plugin, a new slideshow section will be generated on the bottom half of the content part on every available web page. Here you will find a ‘+’ (plus) button that calls for you to choose or to upload an image. Once you have picked the desired image, it can be inserted into the slideshow range using the ‘Use Image’ button. Afterwards the chosen image appears in a box with the option to add text. The slideshow will be shown on the respective web page.
+Once you have installed and activated the plugin, a new slideshow section will be generated on the bottom half of the content part on every available web page. Here you will find a '+' (plus) button that calls for you to choose or to upload an image. Once you have picked the desired image, it can be inserted into the slideshow range using the 'Use Image' button. Afterwards the chosen image appears in a box with the option to add text. The slideshow will be shown on the respective web page.
 
 * The slides can be arranged as may be required by dragging them to their desired position via Drag and Drop.
 
-* The slideshow’s layout automatically adjusts to the conditions of the terminal device owing to a responsive web design.
-
+* The slideshow's layout automatically adjusts to the conditions of the terminal device owing to a responsive web design.
 
 
 == Installation ==
@@ -54,7 +59,7 @@ Alternatively, click on https://wordpress.org/plugins/page-slideshow to download
 
 = 0.4.1 =
 
-- readme.txt Update (thanks to Isabel Richter)
+- readme.txt Update (thanks to isabell richter)
 - bugfix: content gets removed if not type of page
 
 = 0.4 =
