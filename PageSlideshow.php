@@ -3,7 +3,7 @@
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
 Description: Page based slideshow
-Version: 0.4
+Version: 0.4.1
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
@@ -287,6 +287,8 @@ function proseed_slideshow($content){
         }else{
             return $content;
         }
+    }else{
+        return $content;
     }
 
 }
