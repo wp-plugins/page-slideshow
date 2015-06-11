@@ -8,7 +8,7 @@ Stable tag: 0.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
-With Page Slideshow you can create an individual, responsive and sortable slideshow that can be embedded into every web page. Uses CSS3 transitions between slides for a smooth effect.
+With Page Slideshow you can create individual, responsive and sortable slideshow's. Uses performance-friendly CSS3 transitions.
 
 == Description ==
 
