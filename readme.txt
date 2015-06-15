@@ -8,7 +8,7 @@ Stable tag: 0.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
-With Page Slideshow you can create individual, responsive and sortable slideshow's. Uses performance-friendly CSS3 transitions.
+With Page Slideshow you can create individual, responsive and sortable slideshows. Uses performance-friendly CSS3 transitions.
 
 == Description ==
 
@@ -59,7 +59,7 @@ Alternatively, click on https://wordpress.org/plugins/page-slideshow to download
 
 = 0.4.1 =
 
-- readme.txt Update (thanks to isabell richter)
+- readme.txt Update (thanks to isabel richter)
 - bugfix: content gets removed if not type of page
 
 = 0.4 =
