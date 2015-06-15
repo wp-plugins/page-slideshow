@@ -24,7 +24,7 @@ After having successfully installed Page Slideshow, the plugin offers different 
 
 * Navigation: You can choose between two different methods with which to navigate your slideshow:
 
-    1. With the help of navigation points, which are visibly displayed as dots that on the bottom of the slides and can be used to navigate between slides
+    1. With the help of navigation points, which are visibly displayed as dots on the bottom of the slides and can be used to navigate between slides
     2. By using the navigation arrows that appear on each side of the slideshow during a mouseover
 
     Both of these methods can be displayed simultaneously
