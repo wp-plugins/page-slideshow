@@ -31,7 +31,6 @@ After having successfully installed Page Slideshow, the plugin offers different 
 
 * Image size: The chosen image size affects the maximum solution of the slideshow images
 
-
 **Creation**
 
 Once you have installed and activated the plugin, a new slideshow section will be generated on the bottom half of the content part on every available web page. Here you will find a '+' (plus) button that calls for you to choose or to upload an image. Once you have picked the desired image, it can be inserted into the slideshow range using the 'Use Image' button. Afterwards the chosen image appears in a box with the option to add text. The slideshow will be shown on the respective web page.
