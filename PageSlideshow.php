@@ -17,7 +17,10 @@ add_image_size( 'proseed_teaserThumb', 290, 150,true);
 
 add_image_size( 'proseed_slideThumb', get_option('proseed-slideshow-imagesize-width'), get_option('proseed-slideshow-imagesize-height'),true);
 
-
+function proseed_load_plugin_textdomain() {
+    load_plugin_textdomain( 'page-slideshow', FALSE, basename( dirname( __FILE__ ) ) . '/lang/' );
+}
+add_action( 'plugins_loaded', 'proseed_load_plugin_textdomain' );
 
 function proseed_meta_image_fields($cnt, $p = null) {
 
