@@ -59,7 +59,7 @@ Alternatively, click on https://wordpress.org/plugins/page-slideshow to download
 
 = 0.4.2 =
 
-- added translation / translation files (thanks to MaxByer for the review)
+- added translation / translation files (thanks to [MaxByer](https://wordpress.org/support/profile/maxbyer) for the review)
 
 = 0.4.1 =
 
