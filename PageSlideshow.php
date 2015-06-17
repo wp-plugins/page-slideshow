@@ -3,10 +3,11 @@
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
 Description: Page based slideshow
-Version: 0.4.1
+Version: 0.4.2
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
+Domain path: /lang
 */
 
 
@@ -84,11 +85,8 @@ function proseed_slideshow_image_enqueue() {
         wp_localize_script( 'proseed-meta-image', 'proseed_meta_image',
 
             array(
-
-                'title' => 'Bild wählen oder hochladen',
-
-                'button' => 'Bild verwenden',
-
+                'title' => __('Choose or Upload','page-slideshow'),
+                'button' => __('Apply Image','page-slideshow')
             )
 
         );

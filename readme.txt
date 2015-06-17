@@ -4,7 +4,7 @@ Tags: slideshow,responsive,page,flexslider,transitions
 Donate link: http://www.proseed.de
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
@@ -56,6 +56,10 @@ Alternatively, click on https://wordpress.org/plugins/page-slideshow to download
 1. Screenshot of the main features of Page Slideshow. You may add images, apply text and arrange slides as desired.
 
 == Changelog ==
+
+= 0.4.2 =
+
+- added translation / translation files (thanks to MaxByer for the review)
 
 = 0.4.1 =
 
