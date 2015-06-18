@@ -4,7 +4,7 @@ Tags: slideshow,responsive,page,flexslider,transitions
 Donate link: http://www.proseed.de
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 0.4.3
+Stable tag: 0.4.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0
 
