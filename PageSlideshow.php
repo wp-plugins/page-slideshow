@@ -7,9 +7,7 @@ Version: 0.4.2
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
-Domain path: /lang
 */
-
 
 // Backend Image size
 
