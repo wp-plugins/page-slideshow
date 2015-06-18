@@ -57,6 +57,10 @@ Alternatively, click on https://wordpress.org/plugins/page-slideshow to download
 
 == Changelog ==
 
+= 0.4.4 =
+
+- global: changed functionname prefix to 'pageSlideshow'
+
 = 0.4.3 =
 
 - bugfix: removed domainpath setup

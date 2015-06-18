@@ -2,8 +2,8 @@
 /*
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
-Description: Page based slideshow
-Version: 0.4.3
+Description: With Page Slideshow you can create individual, responsive and sortable slideshows. Uses performance-friendly CSS3 transitions.
+Version: 0.4.4
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
@@ -11,16 +11,16 @@ Text Domain: page-slideshow
 
 // Backend Image size
 
-add_image_size( 'proseed_teaserThumb', 290, 150,true);
+add_image_size( 'pageSlideshow_teaserThumb', 290, 150,true);
 
-add_image_size( 'proseed_slideThumb', get_option('proseed-slideshow-imagesize-width'), get_option('proseed-slideshow-imagesize-height'),true);
+add_image_size( 'pageSlideshow_slideThumb', get_option('proseed-slideshow-imagesize-width'), get_option('proseed-slideshow-imagesize-height'),true);
 
-function proseed_load_plugin_textdomain() {
+function pageSlideshow_load_plugin_textdomain() {
     load_plugin_textdomain( 'page-slideshow', FALSE, basename( dirname( __FILE__ ) ) . '/lang/' );
 }
-add_action( 'plugins_loaded', 'proseed_load_plugin_textdomain' );
+add_action( 'plugins_loaded', 'pageSlideshow_load_plugin_textdomain' );
 
-function proseed_meta_image_fields($cnt, $p = null) {
+function pageSlideshow_meta_image_fields($cnt, $p = null) {
 
     if ($p === null){
 
@@ -34,7 +34,7 @@ function proseed_meta_image_fields($cnt, $p = null) {
 
     }
 
-    $image_src = wp_get_attachment_image_src( $a, "proseed_teaserThumb");
+    $image_src = wp_get_attachment_image_src( $a, "pageSlideshow_teaserThumb");
     $attach_data = wp_generate_attachment_metadata( $a, get_attached_file($a) );
     wp_update_attachment_metadata( $a,  $attach_data );
     echo '<li>';
@@ -61,19 +61,19 @@ function proseed_meta_image_fields($cnt, $p = null) {
 
 
 
-add_action("add_meta_boxes", "proseed_object_init");
+add_action("add_meta_boxes", "pageSlideshow_object_init");
 
 
 
-function proseed_object_init(){
+function pageSlideshow_object_init(){
 
-    add_meta_box("proseed_meta_image_id", "Slideshow","proseed_meta_image", "page", "normal", "low");
+    add_meta_box("pageSlideshow_meta_image_id", "Slideshow","pageSlideshow_meta_image", "page", "normal", "low");
 
 }
 
 
 
-function proseed_slideshow_image_enqueue() {
+function pageSlideshow_slideshow_image_enqueue() {
 
     global $typenow;
 
@@ -83,7 +83,7 @@ function proseed_slideshow_image_enqueue() {
 
         wp_register_script( 'proseed-meta-image', plugins_url( 'js/meta-image.js', __FILE__ ), array( 'jquery' ) );
 
-        wp_localize_script( 'proseed-meta-image', 'proseed_meta_image',
+        wp_localize_script( 'proseed-meta-image', 'pageSlideshow_meta_image',
 
             array(
                 'title' => __('Choose or Upload','page-slideshow'),
@@ -102,9 +102,9 @@ function proseed_slideshow_image_enqueue() {
 
 }
 
-add_action( 'admin_enqueue_scripts', 'proseed_slideshow_image_enqueue' );
+add_action( 'admin_enqueue_scripts', 'pageSlideshow_slideshow_image_enqueue' );
 
-function proseed_meta_image(){
+function pageSlideshow_meta_image(){
 
     global $post;
 
@@ -124,7 +124,7 @@ function proseed_meta_image(){
 
             if (isset($p['id'])){
 
-                proseed_meta_image_fields($c,$p);
+                pageSlideshow_meta_image_fields($c,$p);
 
                 $c = $c +1;
 
@@ -158,7 +158,7 @@ function proseed_meta_image(){
 
                 count = count + 1;
 
-                $('#proseed-image-items').append('<?php echo implode('',explode("\n",proseed_meta_image_fields('count'))); ?>'.replace(/count/g, count));
+                $('#proseed-image-items').append('<?php echo implode('',explode("\n",pageSlideshow_meta_image_fields('count'))); ?>'.replace(/count/g, count));
 
                 return false;
 
@@ -186,11 +186,11 @@ function proseed_meta_image(){
 
 
 
-add_action('save_post', 'proseed_save_details');
+add_action('save_post', 'pageSlideshow_save_details');
 
 
 
-function proseed_save_details($post_id){
+function pageSlideshow_save_details($post_id){
 
     global $post;
 
@@ -218,7 +218,7 @@ function proseed_save_details($post_id){
 
 }
 
-function proseed_insert_custom_image_sizes( $sizes ) {
+function pageSlideshow_insert_custom_image_sizes( $sizes ) {
 
     global $_wp_additional_image_sizes;
 
@@ -240,9 +240,9 @@ function proseed_insert_custom_image_sizes( $sizes ) {
 
 }
 
-add_filter( 'image_size_names_choose', 'proseed_insert_custom_image_sizes' );
+add_filter( 'image_size_names_choose', 'pageSlideshow_insert_custom_image_sizes' );
 
-function proseed_slideshow($content){
+function pageSlideshow_slideshow($content){
     if(get_post_type()=='page'){
         global $post;
         wp_enqueue_style('proseed-meta-flexslider', plugins_url('css/flexslider.css', __FILE__));
@@ -271,7 +271,7 @@ function proseed_slideshow($content){
                 $slideshow .= '<ul class="slides">';
                 foreach ($images as $image) {
                     $slideshow .= '<li>';
-                    $slideshow .= wp_get_attachment_image($image[id], 'proseed_slideThumb');
+                    $slideshow .= wp_get_attachment_image($image[id], 'pageSlideshow_slideThumb');
                     $slideshow .= '<p class="flex-caption">' . $image[headline] . '</p>';
                     $slideshow .= '</li>';
                 }
@@ -279,7 +279,7 @@ function proseed_slideshow($content){
                 $slideshow .= '</ul>';
                 $slideshow .= '</div>';
             } else {
-                $slideshow = wp_get_attachment_image($images[1][id], 'proseed_slideThumb');
+                $slideshow = wp_get_attachment_image($images[1][id], 'pageSlideshow_slideThumb');
             }
             if( get_option('proseed-slideshow-position')==0) $slideshow .= $content;
             return $slideshow;
@@ -291,19 +291,19 @@ function proseed_slideshow($content){
     }
 
 }
-add_filter('the_content','proseed_slideshow');
+add_filter('the_content','pageSlideshow_slideshow');
 
 /* Options page */
 
 if ( is_admin() ){ // admin actions
 
-add_action( 'admin_menu', 'proseed_plugin_menu' );
-  add_action( 'admin_init', 'proseed_register_settings' );
+add_action( 'admin_menu', 'pageSlideshow_plugin_menu' );
+  add_action( 'admin_init', 'pageSlideshow_register_settings' );
 } else {
   // non-admin enqueues, actions, and filters
 }
 
-function proseed_register_settings() {
+function pageSlideshow_register_settings() {
     register_setting( 'page-slideshow-options', 'proseed-slideshow-position' );
     register_setting( 'page-slideshow-options', 'proseed-slideshow-animation' );
     register_setting( 'page-slideshow-options', 'proseed-slideshow-control' );
@@ -312,12 +312,12 @@ function proseed_register_settings() {
     register_setting( 'page-slideshow-options', 'proseed-slideshow-imagesize-height' );
 }
 
-function proseed_plugin_menu() {
-	add_options_page( 'Slideshow options', 'Page slideshow', 'manage_options', 'proseed-identifier', 'proseed_plugin_options' );
+function pageSlideshow_plugin_menu() {
+	add_options_page( 'Slideshow options', 'Page slideshow', 'manage_options', 'proseed-identifier', 'pageSlideshow_plugin_options' );
 }
 
 
-function proseed_plugin_options() {
+function pageSlideshow_plugin_options() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
