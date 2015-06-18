@@ -3,13 +3,11 @@
 Plugin Name: Page slideshow
 Author: <a href="mailto:a.kr3mer@gmail.com">Adrian Kremer</a> - <a href="http://www.proseed.de">proseed GmbH</a>
 Description: Page based slideshow
-Version: 0.4.2
+Version: 0.4.3
 Author URI: http://www.proseed.de/
 License: GPL2+
 Text Domain: page-slideshow
-Domain path: /lang
 */
-
 
 // Backend Image size
 
